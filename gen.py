@@ -1,5 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 import os,glob
+import numpy as np
 
 parentPath=r"CaptchaDataset\\"
 
@@ -23,5 +24,7 @@ for index,character in enumerate(charactersList):
             w,h=fnt.getsize(character)
             d = ImageDraw.Draw(img)
             d.text(((80-w)/2,((80-h)/2)-5), character, font=fnt, fill=(255),align="center")
+            img=np.pad(img,pad_width=10, mode='constant', constant_values=0)
+            img=Image.fromarray(img)
             img.save(path+"\\"+str(imageCounter)+"_"+str(repeats)+".jpg")
 
