@@ -17,10 +17,11 @@ for index,character in enumerate(charactersList):
     
     
     for imageCounter in range(len(fontTypes)):
-        img = Image.new('1', (80, 80), color = 'black')
-        fnt = ImageFont.truetype(fontTypes[imageCounter], 115)
-        w,h=fnt.getsize(character)
-        d = ImageDraw.Draw(img)
-        d.text(((80-w)/2,((80-h)/2)-5), character, font=fnt, fill=(255),align="center")
-        img.save(path+"\\"+str(imageCounter)+".jpg")
+        for repeats in range(100):
+            img = Image.new('1', (80, 80), color = 'black')
+            fnt = ImageFont.truetype(fontTypes[imageCounter], 115)
+            w,h=fnt.getsize(character)
+            d = ImageDraw.Draw(img)
+            d.text(((80-w)/2,((80-h)/2)-5), character, font=fnt, fill=(255),align="center")
+            img.save(path+"\\"+str(imageCounter)+"_"+str(repeats)+".jpg")
 
