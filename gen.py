@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import os,glob
 import numpy as np
+import random
 
 parentPath=r"CaptchaDataset\\"
 
@@ -18,13 +19,14 @@ for index,character in enumerate(charactersList):
     
     
     for imageCounter in range(len(fontTypes)):
-        for repeats in range(100):
-            img = Image.new('1', (80, 80), color = 'black')
-            fnt = ImageFont.truetype(fontTypes[imageCounter], 115)
+        for repeats in range(3):
+            img = Image.new('1', (28, 28), color = 'black')
+            fnt = ImageFont.truetype(fontTypes[imageCounter], random.randint(30,50))
             w,h=fnt.getsize(character)
             d = ImageDraw.Draw(img)
-            d.text(((80-w)/2,((80-h)/2)-5), character, font=fnt, fill=(255),align="center")
+            d.text((0,0), character, font=fnt, fill=(255),align="center")
             img=np.pad(img,pad_width=10, mode='constant', constant_values=0)
             img=Image.fromarray(img)
+            img=img.rotate(random.randint(0,30))
             img.save(path+"\\"+str(imageCounter)+"_"+str(repeats)+".jpg")
 
