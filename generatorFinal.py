@@ -22,21 +22,21 @@ for index,character in enumerate(charactersList):
     
     
     for imageCounter in range(len(fontTypes)):
-        fontSize=15
+        fontSize=70
         print("Creating Dataset for : "+character+" Image Counter = "+str(imageCounter))
         
         fnt = ImageFont.truetype(fontTypes[imageCounter],fontSize)
         w,h=fnt.getsize(character)
         
-        while not (h>=28 and h<=35):
+        while not (h>=80 and h<=95):
             fontSize+=1
             fnt = ImageFont.truetype(fontTypes[imageCounter],fontSize)
             w,h=fnt.getsize(character)
-        
-        img = Image.new('1', (w+3, h), color = 'black')
+        print(fontSize)
+        img = Image.new(mode="1",size=(80, h), color = 'black')
         d = ImageDraw.Draw(img)
         w,h=fnt.getsize(character)
-        d.text((0,0), character, font=fnt, fill=(255),align="center") #TO ALIGN CHARACTER IN CENTER
+        d.text(((80-w)/2,0), character, font=fnt, fill=(255),align="center") #TO ALIGN CHARACTER IN CENTER
         img.save(path+"\\"+str(character)+"_"+str(imageCounter)+".jpg")
 
 
